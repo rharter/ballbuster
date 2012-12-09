@@ -10,6 +10,11 @@ public class Main extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+
+        Game game = new Game(this);
+        setContentView(game);
+
+        game.initialize();
+        game.run();
     }
 }

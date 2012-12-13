@@ -4,8 +4,12 @@ import android.graphics.*;
 
 public abstract class Entity {
 
+	public static final int NORMAL = 0;
+	public static final int DESTROYED = 1;
+
 	protected RectF mFrame;
 	protected Paint mPaint;
+	protected int mState;
 
 	public Entity() {
 		setPaint(new Paint());
@@ -15,6 +19,12 @@ public abstract class Entity {
 	public abstract void update(long time);
 
 	public abstract void draw(Canvas canvas);
+
+	public abstract void handleCollision(Entity e);
+
+	public boolean checkCollision(Entity e) {
+		return RectF.intersects(e.getFrame(), mFrame);
+	}
 
 	public void setColor(int color) {
 		mPaint.setColor(color);
@@ -34,5 +44,13 @@ public abstract class Entity {
 
 	public Paint getPaint() {
 		return mPaint;
+	}
+
+	public void setState(int state) {
+		mState = state;
+	}
+
+	public int getState() {
+		return mState;
 	}
 }
